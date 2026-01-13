@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>Checkout - LAKSMIÉ</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, sans-serif;
@@ -24,6 +25,7 @@
     h2 {
       color: #f2a5b5;
       text-align: center;
+      margin-top: 0;
     }
 
     label {
@@ -38,6 +40,7 @@
       margin-bottom: 15px;
       border: 1px solid #ddd;
       border-radius: 6px;
+      font-size: 14px;
     }
 
     button {
@@ -49,6 +52,7 @@
       font-weight: bold;
       width: 100%;
       cursor: pointer;
+      font-size: 15px;
     }
 
     button:hover {
@@ -61,64 +65,81 @@
       margin-bottom: 25px;
       border-radius: 6px;
     }
+
+    .order-summary p {
+      margin: 6px 0;
+      font-size: 14px;
+    }
+
+    .empty {
+      text-align: center;
+      color: #999;
+      font-style: italic;
+    }
   </style>
 </head>
 
 <body>
-  <div class="checkout-container">
-    <h2>Formulir Checkout LAKSMIÉ</h2>
 
-    <div class="order-summary">
-      <h4>Ringkasan Pesanan</h4>
-      <div id="ringkasan"></div>
-      <p><strong id="total"></strong></p>
-    </div>
+<div class="checkout-container">
+  <h2>Formulir Checkout LAKSMIÉ</h2>
 
-    <form onsubmit="submitPesanan(event)">
-      <label>Nama Pembeli</label>
-      <input type="text" required>
-
-      <label>Alamat</label>
-      <textarea required></textarea>
-
-      <label>No. HP</label>
-      <input type="text" required>
-
-      <label>Metode Pembayaran</label>
-      <select required>
-        <option value="">-- Pilih Metode --</option>
-        <option>Transfer Bank</option>
-        <option>COD</option>
-        <option>E-Wallet</option>
-      </select>
-
-      <button type="submit">Kirim Pesanan</button>
-    </form>
+  <div class="order-summary">
+    <h4>Ringkasan Pesanan</h4>
+    <div id="ringkasan"></div>
+    <p><strong id="total"></strong></p>
   </div>
 
-  <script>
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    const ringkasan = document.getElementById("ringkasan");
-    const totalEl = document.getElementById("total");
+  <form id="checkoutForm">
+    <label>Nama Pembeli</label>
+    <input type="text" required>
 
-    let total = 0;
+    <label>Alamat</label>
+    <textarea required></textarea>
 
-    if (cart.length === 0) {
-      ringkasan.innerHTML = "<p>Keranjang kosong</p>";
-    } else {
-      cart.forEach(item => {
-        ringkasan.innerHTML += `<p>${item.nama} - Rp ${item.harga.toLocaleString()}</p>`;
-        total += item.harga;
-      });
-      totalEl.innerText = "Total: Rp " + total.toLocaleString();
-    }
+    <label>No. HP</label>
+    <input type="text" required>
 
-    function submitPesanan(e) {
-      e.preventDefault();
-      alert("Pesanan berhasil! (Demo)");
-      localStorage.removeItem("cart");
-      window.location.href = "index.html";
-    }
-  </script>
+    <label>Metode Pembayaran</label>
+    <select required>
+      <option value="">-- Pilih Metode --</option>
+      <option>Transfer Bank</option>
+      <option>COD</option>
+      <option>E-Wallet</option>
+    </select>
+
+    <button type="submit">Kirim Pesanan</button>
+  </form>
+</div>
+
+<script>
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const ringkasan = document.getElementById("ringkasan");
+  const totalEl = document.getElementById("total");
+  const form = document.getElementById("checkoutForm");
+
+  let total = 0;
+
+  if (cart.length === 0) {
+    ringkasan.innerHTML = "<p class='empty'>Keranjang kosong</p>";
+    totalEl.innerText = "";
+    form.querySelector("button").disabled = true;
+    form.querySelector("button").style.opacity = "0.6";
+  } else {
+    cart.forEach(item => {
+      ringkasan.innerHTML += `<p>${item.nama} - Rp ${item.harga.toLocaleString()}</p>`;
+      total += item.harga;
+    });
+    totalEl.innerText = "Total: Rp " + total.toLocaleString();
+  }
+
+  form.addEventListener("submit", function(e) {
+    e.preventDefault();
+    alert("Pesanan berhasil dikirim! (Demo)");
+    localStorage.removeItem("cart");
+    window.location.href = "index.html";
+  });
+</script>
+
 </body>
 </html>
