@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Konsultasi Kecantikan - Ara Skincare</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #fffaf9;
+      color: #333;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 30px auto;
+      padding: 20px;
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+
+    h1 {
+      text-align: center;
+      color: #f2a5b5;
+      margin-bottom: 30px;
+    }
+
+    .flex-box {
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .form-section {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .output-section {
+      flex: 1;
+      min-width: 300px;
+      background-color: #fffaf3;
+      padding: 20px;
+      border-radius: 10px;
+      border: 1px dashed #f2a5b5;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    label {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    input, textarea, select {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-family: inherit;
+      font-size: 14px;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    button {
+      background-color: #f2a5b5;
+      color: white;
+      font-weight: bold;
+      border: none;
+      padding: 12px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #e08fa2;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 40px;
+      color: #aaa;
+      font-size: 13px;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        margin: 15px;
+      }
+      .flex-box {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Formulir Konsultasi Kecantikan</h1>
+    <div class="flex-box">
+      <!-- Form -->
+      <div class="form-section">
+        <form onsubmit="tampilkanPesan(event)">
+          <div>
+            <label for="nama">Nama Lengkap</label>
+            <input type="text" id="nama" name="nama" placeholder="Masukkan nama Anda" required />
+          </div>
+
+          <div>
+            <label for="email">Alamat Email</label>
+            <input type="email" id="email" name="email" placeholder="nama@email.com" required />
+          </div>
+
+          <div>
+            <label for="jenis_kulit">Jenis Kulit</label>
+            <select id="jenis_kulit" name="jenis_kulit" required>
+              <option value="">-- Pilih Jenis Kulit --</option>
+              <option value="Normal">Normal</option>
+              <option value="Berminyak">Berminyak</option>
+              <option value="Kering">Kering</option>
+              <option value="Kombinasi">Kombinasi</option>
+              <option value="Sensitif">Sensitif</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="keluhan">Keluhan Kulit / Tujuan Konsultasi</label>
+            <textarea id="keluhan" name="keluhan" placeholder="Ceritakan masalah kulit Anda..." required></textarea>
+          </div>
+
+          <button type="submit">Kirim Konsultasi</button>
+        </form>
+      </div>
+
+      <!-- Output / Ringkasan -->
+      <div class="output-section" id="hasilKonsultasi">
+        <p><em>Ringkasan konsultasi Anda akan tampil di sini setelah mengisi form dan klik "Kirim Konsultasi".</em></p>
+      </div>
+    </div>
+
+    <div class="footer">
+      &copy; 2026 Laksmié. Semua Hak Dilindungi.
+    </div>
+  </div>
+  <div style="text-align:center; margin-top: 10px;">
+    <a href="Project1.htm">&larr; Kembali ke Beranda</a>
+  </div>
+
+  <script>
+    function tampilkanPesan(e) {
+      e.preventDefault();
+
+      const nama = document.getElementById("nama").value;
+      const email = document.getElementById("email").value;
+      const jenis = document.getElementById("jenis_kulit").value;
+      const keluhan = document.getElementById("keluhan").value;
+
+      const output = `
+        <h3>Ringkasan Konsultasi</h3>
+        <p><strong>Nama:</strong> ${nama}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Jenis Kulit:</strong> ${jenis}</p>
+        <p><strong>Keluhan:</strong><br>${keluhan}</p>
+        <p style="color:green;"><em>Terima kasih, kami akan segera menghubungi Anda untuk rekomendasi produk terbaik 💖</em></p>
+      `;
+
+      document.getElementById("hasilKonsultasi").innerHTML = output;
+    }
+  </script>
+</body>
+</html>
