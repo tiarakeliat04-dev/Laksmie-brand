@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <title>LAKSMIÉ - Produk</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
@@ -46,7 +48,7 @@
 
     .card-content h3 {
       margin: 0 0 10px;
-      font-size: 18px;
+      font-size: 16px;
       color: #b46e8b;
     }
 
@@ -101,7 +103,7 @@
       font-weight: bold;
     }
 
-    .checkout button[type="submit"] {
+    .checkout button {
       background: #b46e8b;
       color: white;
       border: none;
@@ -122,88 +124,104 @@
         flex-direction: column;
         align-items: center;
       }
-
       .checkout {
         max-width: 100%;
       }
     }
   </style>
 </head>
+
 <body>
 
 <div class="container">
-  <!-- Daftar Produk -->
+
+  <!-- PRODUK -->
   <div class="produk-list">
+
     <div class="card">
-      <img src="images/serum.jpeg" alt="Laksmié Sari-Wening Brightening Serum">
+      <img src="images/serum.jpeg" alt="Serum">
       <div class="card-content">
         <h3>Laksmié Sari-Wening Brightening Serum</h3>
         <p class="harga">Rp 50.000</p>
-        <p>Mencerahkan dan memudarkan noda dan meratakan warna kulit wajah.</p>
-        <button onclick="tambahKeranjang('Laksmié Sari-Wening Brightening Serum', 50000)">+ Keranjang</button>
+        <p>Mencerahkan dan meratakan warna kulit.</p>
+        <button onclick="tambahKeranjang('Brightening Serum', 50000)">+ Keranjang</button>
       </div>
     </div>
 
     <div class="card">
-      <img src="images/sunscreen.jpg" alt="Laksmié Surya-Jaga Sunscreen Gel">
+      <img src="images/sunscreen.jpg" alt="Sunscreen">
       <div class="card-content">
         <h3>Laksmié Surya-Jaga Sunscreen Gel</h3>
         <p class="harga">Rp 30.000</p>
-        <p>Perlindungan UV tinggi (SPF 50 PA+++) dengan formula gel yang ringan, tidak meninggalkan white cast atau rasa lengket.</p>
-        <button onclick="tambahKeranjang('Laksmié Surya-Jaga Sunscreen Gel', 30000)">+ Keranjang</button>
+        <p>SPF 50 PA+++ ringan dan tidak lengket.</p>
+        <button onclick="tambahKeranjang('Sunscreen Gel', 30000)">+ Keranjang</button>
       </div>
     </div>
 
     <div class="card">
-      <img src="images/mois.jpeg" alt="Laksmié Soko-Raya Daily Barrier Moisturizer">
+      <img src="images/mois.jpeg" alt="Moisturizer">
       <div class="card-content">
-        <h3>Laksmié Soko-Raya Daily Barrier Moisturizer</h3>
+        <h3>Laksmié Soko-Raya Moisturizer</h3>
         <p class="harga">Rp 45.000</p>
-        <p>Mengunci hidrasi, memperkuat skin barrier, dan meredakan iritasi/kemerahan.</p>
-        <button onclick="tambahKeranjang('Laksmié Soko-Raya Daily Barrier Moisturizer', 45000)">+ Keranjang</button>
+        <p>Menjaga kelembapan & skin barrier.</p>
+        <button onclick="tambahKeranjang('Moisturizer', 45000)">+ Keranjang</button>
       </div>
     </div>
+
   </div>
 
-  <!-- Keranjang & Tombol Checkout -->
+  <!-- KERANJANG -->
   <div class="checkout">
     <h2>Keranjang</h2>
     <div id="cartItems"></div>
     <div class="total" id="cartTotal">Total: Rp 0</div>
-
-    <form method="post" action="checkout.php" onsubmit="return kirimCheckout()">
-      <input type="hidden" name="cart_data" id="inputCartData">
-      <button type="submit">Lanjut ke Checkout</button>
-    </form>
+    <button onclick="keCheckout()">Lanjut ke Checkout</button>
   </div>
+
 </div>
 
 <script>
-  let keranjang = [];
+  let keranjang = JSON.parse(localStorage.getItem("cart")) || [];
   let total = 0;
 
   function tambahKeranjang(nama, harga) {
     keranjang.push({ nama, harga });
-    total += harga;
+    simpanCart();
     updateCart();
   }
 
   function updateCart() {
     const list = document.getElementById("cartItems");
     list.innerHTML = "";
+    total = 0;
+
     keranjang.forEach(item => {
       list.innerHTML += `<div class="cart-item">${item.nama} - Rp ${item.harga.toLocaleString()}</div>`;
+      total += item.harga;
     });
-    document.getElementById("cartTotal").textContent = "Total: Rp " + total.toLocaleString();
+
+    document.getElementById("cartTotal").innerText =
+      "Total: Rp " + total.toLocaleString();
   }
 
-  function kirimCheckout() {
-    document.getElementById("inputCartData").value = JSON.stringify(keranjang);
-    return keranjang.length > 0; // hanya lanjut jika keranjang tidak kosong
+  function simpanCart() {
+    localStorage.setItem("cart", JSON.stringify(keranjang));
   }
+
+  function keCheckout() {
+    if (keranjang.length === 0) {
+      alert("Keranjang masih kosong");
+      return;
+    }
+    window.location.href = "checkout.html";
+  }
+
+  updateCart();
 </script>
-<div style="text-align:center; margin-top: 10px;">
-      <a href="Project1.htm">&larr; Kembali ke Beranda</a>
-    </div>
+
+<div style="text-align:center; margin-top:15px;">
+  <a href="index.html">&larr; Kembali ke Beranda</a>
+</div>
+
 </body>
 </html>
