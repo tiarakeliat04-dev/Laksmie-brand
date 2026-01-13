@@ -1,5 +1,5 @@
 <?php
-$conn = new mysqli("localhost", "root", "", "araskincare");
+$conn = new mysqli("localhost", "root", "", "laksmie");
 if ($conn->connect_error) {
     die("Koneksi gagal: " . $conn->connect_error);
 }
@@ -70,3 +70,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 $conn->close();
 ?>
+
