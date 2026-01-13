@@ -22,7 +22,7 @@ $data = mysqli_query($conn, "SELECT * FROM bukutamu ORDER BY id DESC");
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <title>Buku Tamu - Ara Skincare</title>
+  <title>Buku Tamu - Laksmie</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -135,3 +135,4 @@ $data = mysqli_query($conn, "SELECT * FROM bukutamu ORDER BY id DESC");
     </div>
 </body>
 </html>
+
