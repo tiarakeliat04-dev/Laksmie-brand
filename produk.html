@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>LAKSMIÉ - Produk</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background-color: #fffaf9;
+      padding: 20px;
+      color: #333;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+    }
+
+    .produk-list {
+      flex: 3;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .card {
+      width: 240px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .card-content {
+      padding: 15px;
+    }
+
+    .card-content h3 {
+      margin: 0 0 10px;
+      font-size: 16px;
+      color: #b46e8b;
+    }
+
+    .harga {
+      font-weight: bold;
+      color: #e91e63;
+    }
+
+    .card-content p {
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    .card-content button {
+      width: 100%;
+      padding: 10px;
+      background-color: #b46e8b;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .card-content button:hover {
+      background-color: #9c5d77;
+    }
+
+    .checkout {
+      flex: 1;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      height: fit-content;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      max-width: 300px;
+    }
+
+    .checkout h2 {
+      margin-top: 0;
+      color: #b46e8b;
+    }
+
+    .cart-item {
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+
+    .total {
+      text-align: right;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    .checkout button {
+      background: #b46e8b;
+      color: white;
+      border: none;
+      padding: 10px;
+      margin-top: 10px;
+      width: 100%;
+      font-weight: bold;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .checkout button:hover {
+      background: #9c5d77;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        align-items: center;
+      }
+      .checkout {
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- PRODUK -->
+  <div class="produk-list">
+
+    <div class="card">
+      <img src="images/serum.jpeg" alt="Serum">
+      <div class="card-content">
+        <h3>Laksmié Sari-Wening Brightening Serum</h3>
+        <p class="harga">Rp 50.000</p>
+        <p>Mencerahkan dan meratakan warna kulit.</p>
+        <button onclick="tambahKeranjang('Brightening Serum', 50000)">+ Keranjang</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="images/sunscreen.jpg" alt="Sunscreen">
+      <div class="card-content">
+        <h3>Laksmié Surya-Jaga Sunscreen Gel</h3>
+        <p class="harga">Rp 30.000</p>
+        <p>SPF 50 PA+++ ringan dan tidak lengket.</p>
+        <button onclick="tambahKeranjang('Sunscreen Gel', 30000)">+ Keranjang</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="images/mois.jpeg" alt="Moisturizer">
+      <div class="card-content">
+        <h3>Laksmié Soko-Raya Moisturizer</h3>
+        <p class="harga">Rp 45.000</p>
+        <p>Menjaga kelembapan & skin barrier.</p>
+        <button onclick="tambahKeranjang('Moisturizer', 45000)">+ Keranjang</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- KERANJANG -->
+  <div class="checkout">
+    <h2>Keranjang</h2>
+    <div id="cartItems"></div>
+    <div class="total" id="cartTotal">Total: Rp 0</div>
+    <button onclick="keCheckout()">Lanjut ke Checkout</button>
+  </div>
+
+</div>
+
+<script>
+  let keranjang = JSON.parse(localStorage.getItem("cart")) || [];
+  let total = 0;
+
+  function tambahKeranjang(nama, harga) {
+    keranjang.push({ nama, harga });
+    simpanCart();
+    updateCart();
+  }
+
+  function updateCart() {
+    const list = document.getElementById("cartItems");
+    list.innerHTML = "";
+    total = 0;
+
+    keranjang.forEach(item => {
+      list.innerHTML += `<div class="cart-item">${item.nama} - Rp ${item.harga.toLocaleString()}</div>`;
+      total += item.harga;
+    });
+
+    document.getElementById("cartTotal").innerText =
+      "Total: Rp " + total.toLocaleString();
+  }
+
+  function simpanCart() {
+    localStorage.setItem("cart", JSON.stringify(keranjang));
+  }
+
+  function keCheckout() {
+    if (keranjang.length === 0) {
+      alert("Keranjang masih kosong");
+      return;
+    }
+    window.location.href = "checkout.html";
+  }
+
+  updateCart();
+</script>
+
+<div style="text-align:center; margin-top:15px;">
+  <a href="index.html">&larr; Kembali ke Beranda</a>
+</div>
+
+</body>
+</html>
+
