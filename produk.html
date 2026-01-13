@@ -182,18 +182,17 @@
 
 <script>
   let keranjang = JSON.parse(localStorage.getItem("cart")) || [];
-  let total = 0;
 
   function tambahKeranjang(nama, harga) {
     keranjang.push({ nama, harga });
-    simpanCart();
+    localStorage.setItem("cart", JSON.stringify(keranjang));
     updateCart();
   }
 
   function updateCart() {
     const list = document.getElementById("cartItems");
+    let total = 0;
     list.innerHTML = "";
-    total = 0;
 
     keranjang.forEach(item => {
       list.innerHTML += `<div class="cart-item">${item.nama} - Rp ${item.harga.toLocaleString()}</div>`;
@@ -202,10 +201,6 @@
 
     document.getElementById("cartTotal").innerText =
       "Total: Rp " + total.toLocaleString();
-  }
-
-  function simpanCart() {
-    localStorage.setItem("cart", JSON.stringify(keranjang));
   }
 
   function keCheckout() {
@@ -225,4 +220,3 @@
 
 </body>
 </html>
-
