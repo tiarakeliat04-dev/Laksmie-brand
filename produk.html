@@ -2,38 +2,13 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pembelian Produk - Laksmie</title>
-
+  <title>Produk LAKSMIÉ</title>
   <style>
     body {
+      font-family: Arial, sans-serif;
+      background: #fffaf9;
       margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #fffaf9;
-      color: #333;
-    }
-
-    nav {
-      background: #ffffff;
-      padding: 15px;
-      text-align: center;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    }
-
-    nav a {
-      margin: 0 15px;
-      text-decoration: none;
-      font-weight: bold;
-      color: #d85c8d;
-    }
-
-    .container {
-      max-width: 960px;
-      margin: 30px auto;
-      background: #fff;
       padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
     }
 
     h1 {
@@ -41,146 +16,87 @@
       color: #f2a5b5;
     }
 
-    form {
+    .produk-container {
       display: grid;
-      gap: 15px;
-      margin-bottom: 30px;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+      max-width: 1000px;
+      margin: auto;
     }
 
-    input, select, textarea, button {
-      padding: 10px;
-      font-size: 14px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-    }
-
-    button {
-      background-color: #f2a5b5;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-      border: none;
-    }
-
-    button:hover {
-      background-color: #e08fa2;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 14px;
-    }
-
-    th, td {
-      border: 1px solid #ddd;
-      padding: 10px;
-      text-align: left;
-    }
-
-    th {
-      background-color: #f2a5b5;
-      color: white;
-    }
-
-    footer {
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
       text-align: center;
-      margin-top: 40px;
-      color: #aaa;
-      font-size: 13px;
+    }
+
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .card h3 {
+      color: #f2a5b5;
+      margin: 15px 0 5px;
+    }
+
+    .card p {
+      font-size: 14px;
+      color: #666;
+    }
+
+    .card a {
+      display: inline-block;
+      margin-top: 15px;
+      background: #f2a5b5;
+      color: white;
+      padding: 10px 18px;
+      border-radius: 20px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .card a:hover {
+      background: #e08fa2;
     }
   </style>
 </head>
-
 <body>
 
-<nav>
-  <a href="index.html">Home</a>
-  <a href="produk.html">Produk</a>
-  <a href="artikel.html">Artikel</a>
-  <a href="konsultasi.html">Konsultasi</a>
-  <a href="kontak.html">Kontak Kami</a>
-</nav>
+<h1>Koleksi Produk LAKSMIÉ</h1>
 
-<div class="container">
-  <h1>Pembelian Produk LAKSMIÉ</h1>
+<div class="produk-container">
 
-  <!-- FORM PEMBELIAN -->
-  <form onsubmit="simpanPembelian(event)">
-    <input type="text" id="nama" placeholder="Nama Pembeli" required>
+  <div class="card">
+    <img src="images/facial.jpg" alt="Facial Wash">
+    <h3>Facial Wash</h3>
+    <p>Pembersih wajah lembut dengan bahan alami.</p>
+    <a href="checkout.html?produk=Facial Wash">Beli Sekarang</a>
+  </div>
 
-    <select id="produk">
-      <option value="Serum Wajah">Serum Wajah</option>
-      <option value="Facial Wash">Facial Wash</option>
-      <option value="Moisturizer">Moisturizer</option>
-      <option value="Sunscreen">Sunscreen</option>
-    </select>
+  <div class="card">
+    <img src="images/serum.jpg" alt="Serum Glow">
+    <h3>Serum Glow</h3>
+    <p>Mencerahkan kulit dan membuat wajah tampak glowing.</p>
+    <a href="checkout.html?produk=Serum Glow">Beli Sekarang</a>
+  </div>
 
-    <input type="number" id="jumlah" placeholder="Jumlah" required min="1">
+  <div class="card">
+    <img src="images/cream.jpg" alt="Day Cream">
+    <h3>Day Cream</h3>
+    <p>Melembapkan dan melindungi kulit sepanjang hari.</p>
+    <a href="checkout.html?produk=Day Cream">Beli Sekarang</a>
+  </div>
 
-    <textarea id="alamat" placeholder="Alamat Pengiriman" required></textarea>
-
-    <button type="submit">Beli Sekarang</button>
-  </form>
-
-  <!-- RIWAYAT PEMBELIAN -->
-  <h3>Riwayat Pembelian</h3>
-  <table>
-    <thead>
-      <tr>
-        <th>No</th>
-        <th>Nama</th>
-        <th>Produk</th>
-        <th>Jumlah</th>
-        <th>Alamat</th>
-      </tr>
-    </thead>
-    <tbody id="riwayat"></tbody>
-  </table>
 </div>
 
-<footer>
-  &copy; 2026 Laksmié. Semua Hak Dilindungi.
-</footer>
-
-<script>
-let pembelian = JSON.parse(localStorage.getItem('pembelian')) || [];
-
-function render() {
-  const tbody = document.getElementById("riwayat");
-  tbody.innerHTML = "";
-
-  pembelian.forEach((item, index) => {
-    tbody.innerHTML += `
-      <tr>
-        <td>${index + 1}</td>
-        <td>${item.nama}</td>
-        <td>${item.produk}</td>
-        <td>${item.jumlah}</td>
-        <td>${item.alamat}</td>
-      </tr>
-    `;
-  });
-}
-
-function simpanPembelian(e) {
-  e.preventDefault();
-
-  const data = {
-    nama: nama.value,
-    produk: produk.value,
-    jumlah: jumlah.value,
-    alamat: alamat.value
-  };
-
-  pembelian.unshift(data);
-  localStorage.setItem("pembelian", JSON.stringify(pembelian));
-  render();
-  e.target.reset();
-}
-
-render();
-</script>
+<div style="text-align:center; margin-top:20px;">
+  <a href="index.html">&larr; Kembali ke Beranda</a>
+</div>
 
 </body>
 </html>
