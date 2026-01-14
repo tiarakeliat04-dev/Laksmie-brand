@@ -3,17 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Home - LAKSMIÉ</title>
+  <title>LAKSMIÉ - Home</title>
+
   <style>
     :root {
       --warna-utama: #f2a5b5;
       --warna-teks: #333;
-      --putih: #ffffff;
       --abu: #777;
-    }
-
-    * {
-      box-sizing: border-box;
     }
 
     body {
@@ -23,24 +19,38 @@
       color: var(--warna-teks);
     }
 
+    nav {
+      background: white;
+      padding: 15px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+      color: #e91e63;
+    }
+
+    nav a:hover {
+      color: #c2185b;
+    }
+
     .hero {
-      background-image: url('Images/skincare-banner.jpg');
+      background-image: url('images/skincare-banner.jpg');
       background-size: cover;
       background-position: center;
-      height: 250px;
+      height: 260px;
       display: flex;
       align-items: center;
       justify-content: center;
       color: white;
-      text-align: center;
-      padding: 20px;
     }
 
     .hero h1 {
-      font-size: 30px;
-      margin: 0;
-      background-color: rgba(0,0,0,0.5);
-      padding: 10px 20px;
+      background: rgba(0,0,0,0.5);
+      padding: 15px 25px;
       border-radius: 10px;
     }
 
@@ -48,6 +58,7 @@
       max-width: 960px;
       margin: 30px auto;
       padding: 0 20px;
+      text-align: center;
     }
 
     .highlight {
@@ -55,128 +66,102 @@
       color: white;
       padding: 12px;
       border-radius: 8px;
-      text-align: center;
-      font-size: 14px;
-      margin: 15px 0 25px;
-    }
-
-    .intro {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    .intro h2 {
-      color: var(--warna-utama);
-      margin-bottom: 8px;
-    }
-
-    .intro p {
-      font-size: 15px;
-      color: var(--abu);
-      margin: 0;
+      margin-bottom: 30px;
     }
 
     .features {
       display: flex;
-      flex-wrap: wrap;
       gap: 20px;
       justify-content: center;
-      margin-top: 30px;
+      flex-wrap: wrap;
     }
 
     .feature-box {
-      background-color: #fff;
-      border: 1px solid #eee;
+      background: white;
       padding: 20px;
       border-radius: 10px;
       width: 280px;
       box-shadow: 0 0 10px rgba(0,0,0,0.05);
-      text-align: center;
     }
 
     .feature-box h3 {
-      margin-top: 0;
       color: var(--warna-utama);
     }
 
     .cta {
-      text-align: center;
-      margin: 35px 0;
+      margin: 40px 0;
     }
 
     .cta a {
-      background-color: var(--warna-utama);
+      background: var(--warna-utama);
       color: white;
       padding: 12px 24px;
-      border-radius: 5px;
+      border-radius: 6px;
       text-decoration: none;
       font-weight: bold;
-      transition: background 0.3s;
     }
 
-    .cta a:hover {
-      background-color: #d88fa5;
-    }
-
-    @media (max-width: 768px) {
-      .hero h1 {
-        font-size: 24px;
-      }
-
-      .features {
-        flex-direction: column;
-        align-items: center;
-      }
+    footer {
+      background: #333;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 50px;
     }
   </style>
 </head>
+
 <body>
-    <nav>
-    <a href="index.html">Home</a>
-    <a href="produk.html">Produk</a>
-    <a href="Project1/berita.htm">Artikel</a>
-    <a href="Project1/bukutamu.htm">Buku Tamu</a>
+
+<!-- MENU -->
+<nav>
+  <a href="index.html">Home</a>
+  <a href="produk.html">Produk</a>
+  <a href="Project1/berita.htm">Artikel</a>
+  <a href="Project1/tentang.htm">Tentang Kami</a>
+  <a href="Project1/konsultasi.htm">Konsultasi</a>
+  <a href="Project1/bukutamu.htm">Buku Tamu</a>
 </nav>
 
+<!-- HERO -->
+<div class="hero">
+  <h1>Selamat Datang di LAKSMIÉ</h1>
+</div>
 
-  <!-- Hero Section -->
-  <div class="hero">
-    <h1>Selamat Datang di LAKSMIÉ</h1>
+<!-- ISI HOME -->
+<div class="container">
+
+  <div class="highlight">
+    🎉 Promo Spesial: Diskon 25% untuk semua produk!
   </div>
 
-  <!-- Main Content -->
-  <div class="container">
-    <div class="highlight">
-      🎉 Promo Spesial: Diskon 25% untuk semua produk selama bulan ini!
-    </div>
+  <h2>Kulit Sehat, Cantik Alami</h2>
+  <p>Produk alami, aman, dan teruji dermatologis.</p>
 
-    <div class="intro">
-      <h2>Kulit Sehat, Cantik Alami</h2>
-      <p>LAKSMIÉ menghadirkan produk yang aman, alami, dan telah teruji oleh dermatologis untuk semua jenis kulit.</p>
+  <div class="features">
+    <div class="feature-box">
+      <h3>Bahan Alami</h3>
+      <p>Ekstrak alami berkualitas tinggi.</p>
     </div>
-
-    <div class="features">
-      <div class="feature-box">
-        <h3>Bahan Alami</h3>
-        <p>Diperkaya dengan ekstrak alami seperti aloe vera, green tea, dan chamomile.</p>
-      </div>
-      <div class="feature-box">
-        <h3>Teruji Klinis</h3>
-        <p>Setiap produk telah melalui uji klinis untuk menjamin keamanan dan efektivitasnya.</p>
-      </div>
-      <div class="feature-box">
-        <h3>Untuk Semua Jenis Kulit</h3>
-        <p>Formulasi yang lembut dan cocok untuk kulit kering, berminyak, hingga sensitif.</p>
-      </div>
+    <div class="feature-box">
+      <h3>Teruji Klinis</h3>
+      <p>Aman untuk semua jenis kulit.</p>
     </div>
-
-    <div class="cta">
-      <a href="produk.htm">Lihat Koleksi Produk</a>
+    <div class="feature-box">
+      <h3>Konsultasi Gratis</h3>
+      <p>Dengan beauty advisor profesional.</p>
     </div>
   </div>
-<div style="text-align:center; margin-top: 10px;">
-      <a href="Project1.htm">&larr; Kembali ke Beranda</a>
-    </div>
+
+  <div class="cta">
+    <a href="produk.html">Lihat Produk</a>
+  </div>
+
+</div>
+
+<footer>
+  &copy; 2026 LAKSMIÉ. All Rights Reserved.
+</footer>
+
 </body>
 </html>
-
