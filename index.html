@@ -3,19 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LAKSMIÉ - Home</title>
+  <title>LAKSMIÉ – Official Website</title>
 
   <style>
     :root {
-      --warna-utama: #f2a5b5;
-      --warna-teks: #333;
+      --pink: #e91e63;
+      --soft-pink: #fff0f3;
+      --abu: #777;
     }
 
     body {
       margin: 0;
       font-family: 'Segoe UI', Tahoma, sans-serif;
       background-color: #fffaf9;
-      color: var(--warna-teks);
+      color: #333;
     }
 
     /* NAVBAR */
@@ -30,44 +31,54 @@
       margin: 0 15px;
       text-decoration: none;
       font-weight: bold;
-      color: #e91e63;
+      color: var(--pink);
     }
 
     nav a:hover {
       color: #c2185b;
     }
 
-    /* LOGO */
-    .logo {
-      text-align: center;
-      margin: 25px 0 10px;
-    }
-
-    .logo img {
-      width: 140px;
-    }
-
     /* HERO */
     .hero {
-      background: linear-gradient(135deg, #e91e63, #f48fb1);
-      color: white;
-      padding: 50px 20px;
-      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 25px;
+      padding: 40px 20px;
+      background-color: #fffaf9;
     }
 
+    .hero img {
+      width: 120px;
+    }
+
+    .hero-text h1 {
+      margin: 0;
+      font-size: 34px;
+      color: var(--pink);
+    }
+
+    .hero-text p {
+      margin-top: 8px;
+      font-size: 16px;
+      color: var(--abu);
+    }
+
+    /* CONTENT */
     .container {
-      max-width: 960px;
-      margin: 30px auto;
-      padding: 0 20px;
+      max-width: 1000px;
+      margin: auto;
+      padding: 30px 20px;
       text-align: center;
     }
 
     .highlight {
-      background-color: var(--warna-utama);
-      color: white;
-      padding: 12px;
+      background: var(--soft-pink);
+      padding: 15px;
       border-radius: 8px;
       margin-bottom: 30px;
+      font-weight: bold;
+      color: var(--pink);
     }
 
     .features {
@@ -85,12 +96,41 @@
       box-shadow: 0 0 10px rgba(0,0,0,0.05);
     }
 
+    .feature-box h3 {
+      color: var(--pink);
+    }
+
+    .cta {
+      margin: 40px 0;
+    }
+
+    .cta a {
+      background: var(--pink);
+      color: white;
+      padding: 12px 26px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
     footer {
       background: #333;
       color: white;
       text-align: center;
       padding: 20px;
       margin-top: 50px;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .hero {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .hero img {
+        width: 100px;
+      }
     }
   </style>
 </head>
@@ -106,26 +146,24 @@
   <a href="kontak.html">Kontak Kami</a>
 </nav>
 
-<!-- LOGO -->
-<div class="logo">
-  <img src="images/laksime.jpeg" alt="Logo LAKSMIÉ">
-</div>
-
 <!-- HERO -->
 <div class="hero">
-  <h1>Selamat Datang di LAKSMIÉ</h1>
-  <p>Solusi Perawatan Kulit Sehat & Alami</p>
+  <img src="images/laksime.jpeg" alt="Logo LAKSMIÉ">
+  <div class="hero-text">
+    <h1>Selamat Datang di LAKSMIÉ</h1>
+    <p>Solusi Perawatan Kulit Sehat & Alami</p>
+  </div>
 </div>
 
-<!-- KONTEN -->
+<!-- ISI -->
 <div class="container">
 
   <div class="highlight">
-    🎉 Promo Spesial: Diskon 25% untuk semua produk!
+    🎉 Promo Spesial! Diskon 25% untuk semua produk bulan ini
   </div>
 
   <h2>Kulit Sehat, Cantik Alami</h2>
-  <p>Produk alami, aman, dan teruji dermatologis.</p>
+  <p>Produk perawatan kulit alami, aman, dan teruji dermatologis.</p>
 
   <div class="features">
     <div class="feature-box">
@@ -140,6 +178,10 @@
       <h3>Konsultasi Gratis</h3>
       <p>Dengan beauty advisor profesional.</p>
     </div>
+  </div>
+
+  <div class="cta">
+    <a href="produk.html">Lihat Produk</a>
   </div>
 
 </div>
