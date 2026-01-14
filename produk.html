@@ -1,222 +1,186 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <title>LAKSMIÉ - Produk</title>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pembelian Produk - Laksmie</title>
 
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
       margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: #fffaf9;
-      padding: 20px;
       color: #333;
     }
 
-    .container {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 30px;
-      justify-content: center;
-    }
-
-    .produk-list {
-      flex: 3;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-    }
-
-    .card {
-      width: 240px;
-      background: #fff;
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      overflow: hidden;
-    }
-
-    .card img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-    }
-
-    .card-content {
+    nav {
+      background: #ffffff;
       padding: 15px;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     }
 
-    .card-content h3 {
-      margin: 0 0 10px;
-      font-size: 16px;
-      color: #b46e8b;
-    }
-
-    .harga {
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
       font-weight: bold;
-      color: #e91e63;
+      color: #d85c8d;
     }
 
-    .card-content p {
-      font-size: 14px;
-      margin-bottom: 10px;
-    }
-
-    .card-content button {
-      width: 100%;
-      padding: 10px;
-      background-color: #b46e8b;
-      color: #fff;
-      border: none;
-      border-radius: 6px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .card-content button:hover {
-      background-color: #9c5d77;
-    }
-
-    .checkout {
-      flex: 1;
+    .container {
+      max-width: 960px;
+      margin: 30px auto;
       background: #fff;
       padding: 20px;
       border-radius: 10px;
-      height: fit-content;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      max-width: 300px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
     }
 
-    .checkout h2 {
-      margin-top: 0;
-      color: #b46e8b;
+    h1 {
+      text-align: center;
+      color: #f2a5b5;
     }
 
-    .cart-item {
-      font-size: 14px;
-      margin-bottom: 6px;
+    form {
+      display: grid;
+      gap: 15px;
+      margin-bottom: 30px;
     }
 
-    .total {
-      text-align: right;
-      margin-top: 10px;
-      font-weight: bold;
-    }
-
-    .checkout button {
-      background: #b46e8b;
-      color: white;
-      border: none;
+    input, select, textarea, button {
       padding: 10px;
-      margin-top: 10px;
-      width: 100%;
-      font-weight: bold;
+      font-size: 14px;
       border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      background-color: #f2a5b5;
+      color: white;
+      font-weight: bold;
       cursor: pointer;
+      border: none;
     }
 
-    .checkout button:hover {
-      background: #9c5d77;
+    button:hover {
+      background-color: #e08fa2;
     }
 
-    @media (max-width: 768px) {
-      .container {
-        flex-direction: column;
-        align-items: center;
-      }
-      .checkout {
-        max-width: 100%;
-      }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2a5b5;
+      color: white;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      color: #aaa;
+      font-size: 13px;
     }
   </style>
 </head>
 
 <body>
 
+<nav>
+  <a href="index.html">Home</a>
+  <a href="produk.html">Produk</a>
+  <a href="artikel.html">Artikel</a>
+  <a href="konsultasi.html">Konsultasi</a>
+  <a href="kontak.html">Kontak Kami</a>
+</nav>
+
 <div class="container">
+  <h1>Pembelian Produk LAKSMIÉ</h1>
 
-  <!-- PRODUK -->
-  <div class="produk-list">
+  <!-- FORM PEMBELIAN -->
+  <form onsubmit="simpanPembelian(event)">
+    <input type="text" id="nama" placeholder="Nama Pembeli" required>
 
-    <div class="card">
-      <img src="images/serum.jpeg" alt="Serum">
-      <div class="card-content">
-        <h3>Laksmié Sari-Wening Brightening Serum</h3>
-        <p class="harga">Rp 50.000</p>
-        <p>Mencerahkan dan meratakan warna kulit.</p>
-        <button onclick="tambahKeranjang('Brightening Serum', 50000)">+ Keranjang</button>
-      </div>
-    </div>
+    <select id="produk">
+      <option value="Serum Wajah">Serum Wajah</option>
+      <option value="Facial Wash">Facial Wash</option>
+      <option value="Moisturizer">Moisturizer</option>
+      <option value="Sunscreen">Sunscreen</option>
+    </select>
 
-    <div class="card">
-      <img src="images/sunscreen.jpg" alt="Sunscreen">
-      <div class="card-content">
-        <h3>Laksmié Surya-Jaga Sunscreen Gel</h3>
-        <p class="harga">Rp 30.000</p>
-        <p>SPF 50 PA+++ ringan dan tidak lengket.</p>
-        <button onclick="tambahKeranjang('Sunscreen Gel', 30000)">+ Keranjang</button>
-      </div>
-    </div>
+    <input type="number" id="jumlah" placeholder="Jumlah" required min="1">
 
-    <div class="card">
-      <img src="images/mois.jpeg" alt="Moisturizer">
-      <div class="card-content">
-        <h3>Laksmié Soko-Raya Moisturizer</h3>
-        <p class="harga">Rp 45.000</p>
-        <p>Menjaga kelembapan & skin barrier.</p>
-        <button onclick="tambahKeranjang('Moisturizer', 45000)">+ Keranjang</button>
-      </div>
-    </div>
+    <textarea id="alamat" placeholder="Alamat Pengiriman" required></textarea>
 
-  </div>
+    <button type="submit">Beli Sekarang</button>
+  </form>
 
-  <!-- KERANJANG -->
-  <div class="checkout">
-    <h2>Keranjang</h2>
-    <div id="cartItems"></div>
-    <div class="total" id="cartTotal">Total: Rp 0</div>
-    <button onclick="keCheckout()">Lanjut ke Checkout</button>
-  </div>
-
+  <!-- RIWAYAT PEMBELIAN -->
+  <h3>Riwayat Pembelian</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>No</th>
+        <th>Nama</th>
+        <th>Produk</th>
+        <th>Jumlah</th>
+        <th>Alamat</th>
+      </tr>
+    </thead>
+    <tbody id="riwayat"></tbody>
+  </table>
 </div>
+
+<footer>
+  &copy; 2026 Laksmié. Semua Hak Dilindungi.
+</footer>
 
 <script>
-  let keranjang = JSON.parse(localStorage.getItem("cart")) || [];
+let pembelian = JSON.parse(localStorage.getItem('pembelian')) || [];
 
-  function tambahKeranjang(nama, harga) {
-    keranjang.push({ nama, harga });
-    localStorage.setItem("cart", JSON.stringify(keranjang));
-    updateCart();
-  }
+function render() {
+  const tbody = document.getElementById("riwayat");
+  tbody.innerHTML = "";
 
-  function updateCart() {
-    const list = document.getElementById("cartItems");
-    let total = 0;
-    list.innerHTML = "";
+  pembelian.forEach((item, index) => {
+    tbody.innerHTML += `
+      <tr>
+        <td>${index + 1}</td>
+        <td>${item.nama}</td>
+        <td>${item.produk}</td>
+        <td>${item.jumlah}</td>
+        <td>${item.alamat}</td>
+      </tr>
+    `;
+  });
+}
 
-    keranjang.forEach(item => {
-      list.innerHTML += `<div class="cart-item">${item.nama} - Rp ${item.harga.toLocaleString()}</div>`;
-      total += item.harga;
-    });
+function simpanPembelian(e) {
+  e.preventDefault();
 
-    document.getElementById("cartTotal").innerText =
-      "Total: Rp " + total.toLocaleString();
-  }
+  const data = {
+    nama: nama.value,
+    produk: produk.value,
+    jumlah: jumlah.value,
+    alamat: alamat.value
+  };
 
-  function keCheckout() {
-    if (keranjang.length === 0) {
-      alert("Keranjang masih kosong");
-      return;
-    }
-    window.location.href = "checkout.html";
-  }
+  pembelian.unshift(data);
+  localStorage.setItem("pembelian", JSON.stringify(pembelian));
+  render();
+  e.target.reset();
+}
 
-  updateCart();
+render();
 </script>
-
-<div style="text-align:center; margin-top:15px;">
-  <a href="index.html">&larr; Kembali ke Beranda</a>
-</div>
 
 </body>
 </html>
