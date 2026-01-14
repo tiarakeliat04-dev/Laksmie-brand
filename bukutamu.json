@@ -1,5 +1,12 @@
 [
-  { "nama": "Tiara Yedidha", "email": "tiara@email.com", "pesan": "Website bagus!" },
-  { "nama": "Budi", "email": "budi@email.com", "pesan": "Produk menarik." },
-  { "nama": "Sari", "email": "sari@email.com", "pesan": "Informasi lengkap." }
+  {
+    "nama": "Tiara Yedidha",
+    "email": "tiara@example.com",
+    "pesan": "Website Laksmie keren!"
+  },
+  {
+    "nama": "Andi",
+    "email": "andi@example.com",
+    "pesan": "Produk sangat membantu."
+  }
 ]
