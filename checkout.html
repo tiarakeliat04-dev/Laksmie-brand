@@ -1,133 +1,116 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <title>Checkout - LAKSMIÉ</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #fffaf9;
-      padding: 20px;
-    }
+<meta charset="UTF-8">
+<title>Checkout LAKSMIÉ</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    .container {
-      max-width: 800px;
-      margin: auto;
-      background: white;
-      padding: 25px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
+<style>
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #fffaf9;
+  padding: 20px;
+}
 
-    h2 {
-      text-align: center;
-      color: #f2a5b5;
-    }
+.container {
+  max-width: 700px;
+  margin: auto;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
 
-    input, button {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-    }
+h2 {
+  color: #f2a5b5;
+  text-align: center;
+}
 
-    button {
-      background: #f2a5b5;
-      color: white;
-      border: none;
-      font-weight: bold;
-      cursor: pointer;
-    }
+.item {
+  font-size: 14px;
+  margin-bottom: 6px;
+}
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 25px;
-    }
-
-    th, td {
-      border: 1px solid #ddd;
-      padding: 10px;
-      font-size: 14px;
-    }
-
-    th {
-      background: #f2a5b5;
-      color: white;
-    }
-  </style>
+button {
+  width: 100%;
+  padding: 12px;
+  background: #f2a5b5;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+}
+</style>
 </head>
+
 <body>
 
 <div class="container">
-  <h2>Checkout Produk</h2>
+  <h2>Checkout</h2>
 
-  <form id="checkoutForm">
-    <input type="text" id="nama" placeholder="Nama Pembeli" required>
-    <input type="email" id="email" placeholder="Email" required>
-    <input type="text" id="produk" readonly>
-    <input type="number" id="jumlah" placeholder="Jumlah" min="1" required>
-    <button type="submit">Checkout</button>
-  </form>
+  <div id="checkoutList"></div>
+  <p><strong id="total"></strong></p>
 
+  <button onclick="checkout()">Kirim Pesanan</button>
+
+  <hr>
   <h3>Riwayat Pembelian</h3>
-  <table>
-    <thead>
-      <tr>
-        <th>No</th>
-        <th>Nama</th>
-        <th>Email</th>
-        <th>Produk</th>
-        <th>Jumlah</th>
-      </tr>
-    </thead>
-    <tbody id="riwayat"></tbody>
-  </table>
-</div>
-
-<div style="text-align:center; margin-top:15px;">
-  <a href="produk.html">&larr; Kembali ke Produk</a>
+  <div id="history"></div>
 </div>
 
 <script>
-  const params = new URLSearchParams(window.location.search);
-  document.getElementById("produk").value = params.get("produk") || "";
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+let history = JSON.parse(localStorage.getItem('history')) || [];
 
-  let data = JSON.parse(localStorage.getItem("pembelian")) || [];
-  const tbody = document.getElementById("riwayat");
+function renderCheckout() {
+  let list = document.getElementById('checkoutList');
+  let total = 0;
+  list.innerHTML = '';
 
-  function render() {
-    tbody.innerHTML = "";
-    data.forEach((item, i) => {
-      tbody.innerHTML += `
-        <tr>
-          <td>${i + 1}</td>
-          <td>${item.nama}</td>
-          <td>${item.email}</td>
-          <td>${item.produk}</td>
-          <td>${item.jumlah}</td>
-        </tr>`;
-    });
-  }
-
-  document.getElementById("checkoutForm").addEventListener("submit", e => {
-    e.preventDefault();
-
-    data.unshift({
-      nama: nama.value,
-      email: email.value,
-      produk: produk.value,
-      jumlah: jumlah.value
-    });
-
-    localStorage.setItem("pembelian", JSON.stringify(data));
-    alert("Checkout berhasil ✅");
-    e.target.reset();
-    render();
+  cart.forEach(item => {
+    list.innerHTML += `<div class="item">${item.nama} - Rp ${item.harga.toLocaleString()}</div>`;
+    total += item.harga;
   });
 
-  render();
+  document.getElementById('total').innerText =
+    'Total: Rp ' + total.toLocaleString();
+}
+
+function checkout() {
+  if (cart.length === 0) {
+    alert('Keranjang masih kosong');
+    return;
+  }
+
+  history.unshift({
+    tanggal: new Date().toLocaleString(),
+    items: cart
+  });
+
+  localStorage.setItem('history', JSON.stringify(history));
+  localStorage.removeItem('cart');
+
+  alert('Pesanan berhasil!');
+  cart = [];
+  renderCheckout();
+  renderHistory();
+}
+
+function renderHistory() {
+  let h = document.getElementById('history');
+  h.innerHTML = '';
+
+  history.forEach(p => {
+    h.innerHTML += `<p><strong>${p.tanggal}</strong></p>`;
+    p.items.forEach(i => {
+      h.innerHTML += `<div class="item">- ${i.nama}</div>`;
+    });
+    h.innerHTML += '<hr>';
+  });
+}
+
+renderCheckout();
+renderHistory();
 </script>
 
 </body>
