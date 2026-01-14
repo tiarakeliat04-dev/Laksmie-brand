@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>Checkout Produk - LAKSMIÉ</title>
+  <title>Checkout - LAKSMIÉ</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -24,10 +24,10 @@
       color: #f2a5b5;
     }
 
-    input, select, button {
+    input, button {
       width: 100%;
       padding: 10px;
-      margin: 8px 0 15px;
+      margin: 10px 0;
       border-radius: 5px;
       border: 1px solid #ccc;
     }
@@ -38,10 +38,6 @@
       border: none;
       font-weight: bold;
       cursor: pointer;
-    }
-
-    button:hover {
-      background: #e08fa2;
     }
 
     table {
@@ -65,27 +61,16 @@
 <body>
 
 <div class="container">
-  <h2>Checkout Produk LAKSMIÉ</h2>
+  <h2>Checkout Produk</h2>
 
-  <!-- FORM PEMBELIAN -->
   <form id="checkoutForm">
     <input type="text" id="nama" placeholder="Nama Pembeli" required>
     <input type="email" id="email" placeholder="Email" required>
-
-    <select id="produk" required>
-      <option value="">-- Pilih Produk --</option>
-      <option value="Facial Wash">Facial Wash</option>
-      <option value="Serum Glow">Serum Glow</option>
-      <option value="Day Cream">Day Cream</option>
-      <option value="Night Cream">Night Cream</option>
-    </select>
-
+    <input type="text" id="produk" readonly>
     <input type="number" id="jumlah" placeholder="Jumlah" min="1" required>
-
     <button type="submit">Checkout</button>
   </form>
 
-  <!-- RIWAYAT PEMBELIAN -->
   <h3>Riwayat Pembelian</h3>
   <table>
     <thead>
@@ -102,49 +87,47 @@
 </div>
 
 <div style="text-align:center; margin-top:15px;">
-  <a href="index.html">&larr; Kembali ke Beranda</a>
+  <a href="produk.html">&larr; Kembali ke Produk</a>
 </div>
 
 <script>
-  const form = document.getElementById("checkoutForm");
+  const params = new URLSearchParams(window.location.search);
+  document.getElementById("produk").value = params.get("produk") || "";
+
+  let data = JSON.parse(localStorage.getItem("pembelian")) || [];
   const tbody = document.getElementById("riwayat");
 
-  let dataPembelian = JSON.parse(localStorage.getItem("pembelian")) || [];
-
-  function tampilkanData() {
+  function render() {
     tbody.innerHTML = "";
-    dataPembelian.forEach((item, index) => {
+    data.forEach((item, i) => {
       tbody.innerHTML += `
         <tr>
-          <td>${index + 1}</td>
+          <td>${i + 1}</td>
           <td>${item.nama}</td>
           <td>${item.email}</td>
           <td>${item.produk}</td>
           <td>${item.jumlah}</td>
-        </tr>
-      `;
+        </tr>`;
     });
   }
 
-  form.addEventListener("submit", function(e) {
+  document.getElementById("checkoutForm").addEventListener("submit", e => {
     e.preventDefault();
 
-    const pembelianBaru = {
+    data.unshift({
       nama: nama.value,
       email: email.value,
       produk: produk.value,
       jumlah: jumlah.value
-    };
+    });
 
-    dataPembelian.unshift(pembelianBaru);
-    localStorage.setItem("pembelian", JSON.stringify(dataPembelian));
-
-    alert("Pembelian berhasil disimpan ✅");
-    form.reset();
-    tampilkanData();
+    localStorage.setItem("pembelian", JSON.stringify(data));
+    alert("Checkout berhasil ✅");
+    e.target.reset();
+    render();
   });
 
-  tampilkanData();
+  render();
 </script>
 
 </body>
