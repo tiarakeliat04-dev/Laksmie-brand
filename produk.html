@@ -1,113 +1,174 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <title>Produk LAKSMIÉ</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #fffaf9;
-      margin: 0;
-      padding: 20px;
-    }
+<meta charset="UTF-8">
+<title>Produk LAKSMIÉ</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    h1 {
-      text-align: center;
-      color: #f2a5b5;
-    }
+<style>
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #fffaf9;
+  margin: 0;
+  padding: 20px;
+}
 
-    .produk-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 25px;
-      max-width: 1000px;
-      margin: auto;
-    }
+h1 {
+  text-align: center;
+  color: #f2a5b5;
+}
 
-    .card {
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      text-align: center;
-    }
+.wrapper {
+  max-width: 1000px;
+  margin: auto;
+}
 
-    .card img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      border-radius: 10px;
-    }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+}
 
-    .card h3 {
-      color: #f2a5b5;
-      margin: 15px 0 5px;
-    }
+.card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  overflow: hidden;
+}
 
-    .card p {
-      font-size: 14px;
-      color: #666;
-    }
+.card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
 
-    .card a {
-      display: inline-block;
-      margin-top: 15px;
-      background: #f2a5b5;
-      color: white;
-      padding: 10px 18px;
-      border-radius: 20px;
-      text-decoration: none;
-      font-weight: bold;
-    }
+.card-content {
+  padding: 15px;
+}
 
-    .card a:hover {
-      background: #e08fa2;
-    }
-  </style>
+.card h3 {
+  color: #f2a5b5;
+  margin: 5px 0;
+}
+
+.card p {
+  font-size: 14px;
+  color: #666;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background: #f2a5b5;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #e08fa2;
+}
+
+.cart-box {
+  margin-top: 40px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+.cart-box h2 {
+  color: #f2a5b5;
+}
+
+.cart-item {
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+</style>
 </head>
+
 <body>
 
 <h1>Koleksi Produk LAKSMIÉ</h1>
 
-<div class="container">
-  <!-- Daftar Produk -->
-  <div class="produk-list">
+<div class="wrapper">
+  <div class="grid">
+
     <div class="card">
-      <img src="images/serum.jpeg" alt="Laksmié Sari-Wening Brightening Serum">
+      <img src="images/serum.jpeg">
       <div class="card-content">
-        <h3>Laksmié Sari-Wening Brightening Serum</h3>
-        <p class="harga">Rp 50.000</p>
-        <p>Mencerahkan dan memudarkan noda dan meratakan warna kulit wajah.</p>
-        <button onclick="tambahKeranjang('Laksmié Sari-Wening Brightening Serum', 50000)">+ Keranjang</button>
+        <h3>Brightening Serum</h3>
+        <p>Rp 50.000</p>
+        <p>Mencerahkan kulit wajah.</p>
+        <button onclick="addCart('Brightening Serum', 50000)">Tambah ke Keranjang</button>
       </div>
     </div>
 
     <div class="card">
-      <img src="images/sunscreen.jpg" alt="Laksmié Surya-Jaga Sunscreen Gel">
+      <img src="images/sunscreen.jpg">
       <div class="card-content">
-        <h3>Laksmié Surya-Jaga Sunscreen Gel</h3>
-        <p class="harga">Rp 30.000</p>
-        <p>Perlindungan UV tinggi (SPF 50 PA+++) dengan formula gel yang ringan, tidak meninggalkan white cast atau rasa lengket.</p>
-        <button onclick="tambahKeranjang('Laksmié Surya-Jaga Sunscreen Gel', 30000)">+ Keranjang</button>
+        <h3>Sunscreen Gel</h3>
+        <p>Rp 30.000</p>
+        <p>SPF 50 PA+++ ringan.</p>
+        <button onclick="addCart('Sunscreen Gel', 30000)">Tambah ke Keranjang</button>
       </div>
     </div>
 
     <div class="card">
-      <img src="images/mois.jpeg" alt="Laksmié Soko-Raya Daily Barrier Moisturizer">
+      <img src="images/mois.jpeg">
       <div class="card-content">
-        <h3>Laksmié Soko-Raya Daily Barrier Moisturizer</h3>
-        <p class="harga">Rp 45.000</p>
-        <p>Mengunci hidrasi, memperkuat skin barrier, dan meredakan iritasi/kemerahan.</p>
-        <button onclick="tambahKeranjang('Laksmié Soko-Raya Daily Barrier Moisturizer', 45000)">+ Keranjang</button>
+        <h3>Daily Moisturizer</h3>
+        <p>Rp 45.000</p>
+        <p>Melembapkan & memperkuat skin barrier.</p>
+        <button onclick="addCart('Daily Moisturizer', 45000)">Tambah ke Keranjang</button>
       </div>
     </div>
+
   </div>
 
+  <!-- KERANJANG -->
+  <div class="cart-box">
+    <h2>Keranjang</h2>
+    <div id="cartList"></div>
+    <p><strong id="totalHarga"></strong></p>
+    <a href="checkout.html">➡️ Lanjut ke Checkout</a>
+  </div>
 </div>
 
-<div style="text-align:center; margin-top:20px;">
-  <a href="index.html">&larr; Kembali ke Beranda</a>
-</div>
+<script>
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+function addCart(nama, harga) {
+  cart.push({ nama, harga });
+  localStorage.setItem('cart', JSON.stringify(cart));
+  renderCart();
+}
+
+function renderCart() {
+  let list = document.getElementById('cartList');
+  let total = 0;
+  list.innerHTML = '';
+
+  if (cart.length === 0) {
+    list.innerHTML = '<p>Keranjang kosong</p>';
+    document.getElementById('totalHarga').innerText = '';
+    return;
+  }
+
+  cart.forEach(item => {
+    list.innerHTML += `<div class="cart-item">${item.nama} - Rp ${item.harga.toLocaleString()}</div>`;
+    total += item.harga;
+  });
+
+  document.getElementById('totalHarga').innerText =
+    'Total: Rp ' + total.toLocaleString();
+}
+
+renderCart();
+</script>
 
 </body>
 </html>
