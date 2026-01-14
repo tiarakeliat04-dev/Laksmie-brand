@@ -2,143 +2,149 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>Checkout - LAKSMIÉ</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+  <title>Checkout Produk - LAKSMIÉ</title>
   <style>
     body {
-      font-family: 'Segoe UI', Tahoma, sans-serif;
-      background-color: #fffaf9;
+      font-family: Arial, sans-serif;
+      background: #fffaf9;
       padding: 20px;
-      color: #444;
     }
 
-    .checkout-container {
-      max-width: 700px;
-      margin: 0 auto;
-      background: #ffffff;
-      padding: 25px 30px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: white;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
 
     h2 {
-      color: #f2a5b5;
       text-align: center;
-      margin-top: 0;
+      color: #f2a5b5;
     }
 
-    label {
-      display: block;
-      margin: 12px 0 5px;
-      font-weight: 500;
-    }
-
-    input, textarea, select {
+    input, select, button {
       width: 100%;
       padding: 10px;
-      margin-bottom: 15px;
-      border: 1px solid #ddd;
-      border-radius: 6px;
-      font-size: 14px;
+      margin: 8px 0 15px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
     }
 
     button {
-      background-color: #f2a5b5;
+      background: #f2a5b5;
       color: white;
-      padding: 12px;
       border: none;
-      border-radius: 6px;
       font-weight: bold;
-      width: 100%;
       cursor: pointer;
-      font-size: 15px;
     }
 
     button:hover {
-      background-color: #e08fa2;
+      background: #e08fa2;
     }
 
-    .order-summary {
-      background-color: #fff0f3;
-      padding: 15px;
-      margin-bottom: 25px;
-      border-radius: 6px;
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 25px;
     }
 
-    .order-summary p {
-      margin: 6px 0;
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
       font-size: 14px;
     }
 
-    .empty {
-      text-align: center;
-      color: #999;
-      font-style: italic;
+    th {
+      background: #f2a5b5;
+      color: white;
     }
   </style>
 </head>
-
 <body>
 
-<div class="checkout-container">
-  <h2>Formulir Checkout LAKSMIÉ</h2>
+<div class="container">
+  <h2>Checkout Produk LAKSMIÉ</h2>
 
-  <div class="order-summary">
-    <h4>Ringkasan Pesanan</h4>
-    <div id="ringkasan"></div>
-    <p><strong id="total"></strong></p>
-  </div>
-
+  <!-- FORM PEMBELIAN -->
   <form id="checkoutForm">
-    <label>Nama Pembeli</label>
-    <input type="text" required>
+    <input type="text" id="nama" placeholder="Nama Pembeli" required>
+    <input type="email" id="email" placeholder="Email" required>
 
-    <label>Alamat</label>
-    <textarea required></textarea>
-
-    <label>No. HP</label>
-    <input type="text" required>
-
-    <label>Metode Pembayaran</label>
-    <select required>
-      <option value="">-- Pilih Metode --</option>
-      <option>Transfer Bank</option>
-      <option>COD</option>
-      <option>E-Wallet</option>
+    <select id="produk" required>
+      <option value="">-- Pilih Produk --</option>
+      <option value="Facial Wash">Facial Wash</option>
+      <option value="Serum Glow">Serum Glow</option>
+      <option value="Day Cream">Day Cream</option>
+      <option value="Night Cream">Night Cream</option>
     </select>
 
-    <button type="submit">Kirim Pesanan</button>
+    <input type="number" id="jumlah" placeholder="Jumlah" min="1" required>
+
+    <button type="submit">Checkout</button>
   </form>
+
+  <!-- RIWAYAT PEMBELIAN -->
+  <h3>Riwayat Pembelian</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>No</th>
+        <th>Nama</th>
+        <th>Email</th>
+        <th>Produk</th>
+        <th>Jumlah</th>
+      </tr>
+    </thead>
+    <tbody id="riwayat"></tbody>
+  </table>
+</div>
+
+<div style="text-align:center; margin-top:15px;">
+  <a href="index.html">&larr; Kembali ke Beranda</a>
 </div>
 
 <script>
-  const cart = JSON.parse(localStorage.getItem("cart")) || [];
-  const ringkasan = document.getElementById("ringkasan");
-  const totalEl = document.getElementById("total");
   const form = document.getElementById("checkoutForm");
+  const tbody = document.getElementById("riwayat");
 
-  let total = 0;
+  let dataPembelian = JSON.parse(localStorage.getItem("pembelian")) || [];
 
-  if (cart.length === 0) {
-    ringkasan.innerHTML = "<p class='empty'>Keranjang kosong</p>";
-    totalEl.innerText = "";
-    form.querySelector("button").disabled = true;
-    form.querySelector("button").style.opacity = "0.6";
-  } else {
-    cart.forEach(item => {
-      ringkasan.innerHTML += `<p>${item.nama} - Rp ${item.harga.toLocaleString()}</p>`;
-      total += item.harga;
+  function tampilkanData() {
+    tbody.innerHTML = "";
+    dataPembelian.forEach((item, index) => {
+      tbody.innerHTML += `
+        <tr>
+          <td>${index + 1}</td>
+          <td>${item.nama}</td>
+          <td>${item.email}</td>
+          <td>${item.produk}</td>
+          <td>${item.jumlah}</td>
+        </tr>
+      `;
     });
-    totalEl.innerText = "Total: Rp " + total.toLocaleString();
   }
 
   form.addEventListener("submit", function(e) {
     e.preventDefault();
-    alert("Pesanan berhasil dikirim! (Demo)");
-    localStorage.removeItem("cart");
-    window.location.href = "index.html";
+
+    const pembelianBaru = {
+      nama: nama.value,
+      email: email.value,
+      produk: produk.value,
+      jumlah: jumlah.value
+    };
+
+    dataPembelian.unshift(pembelianBaru);
+    localStorage.setItem("pembelian", JSON.stringify(dataPembelian));
+
+    alert("Pembelian berhasil disimpan ✅");
+    form.reset();
+    tampilkanData();
   });
+
+  tampilkanData();
 </script>
 
 </body>
