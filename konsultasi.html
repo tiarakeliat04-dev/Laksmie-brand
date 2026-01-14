@@ -1,46 +1,179 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Konsultasi - LAKSMIÉ</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Konsultasi Kecantikan - Laksmie</title>
+
   <style>
-    body { font-family:Arial,sans-serif; background:#fffaf9; margin:0; padding:20px; }
-    nav { background:white; padding:15px; text-align:center; box-shadow:0 2px 8px rgba(0,0,0,0.1); }
-    nav a { margin:0 15px; text-decoration:none; font-weight:bold; color:#e91e63; }
-    nav a:hover { color:#c2185b; }
-    .container { max-width:700px; margin:auto; background:white; padding:20px; border-radius:8px; box-shadow:0 0 10px rgba(0,0,0,0.1); }
-    h2 { color:#f2a5b5; text-align:center; }
-    form input, form textarea { width:100%; padding:10px; margin:5px 0 15px; border:1px solid #ccc; border-radius:5px; }
-    button { background:#f2a5b5; color:white; padding:10px 20px; border:none; border-radius:5px; cursor:pointer; }
-    button:hover { background:#e08fa2; }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #fffaf9;
+      color: #333;
+    }
+
+    nav {
+      background-color: #ffffff;
+      padding: 15px;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: #d85c8d;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 30px auto;
+      padding: 20px;
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+
+    h1 {
+      text-align: center;
+      color: #f2a5b5;
+      margin-bottom: 30px;
+    }
+
+    .flex-box {
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .form-section {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .output-section {
+      flex: 1;
+      min-width: 300px;
+      background-color: #fffaf3;
+      padding: 20px;
+      border-radius: 10px;
+      border: 1px dashed #f2a5b5;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    input, textarea, select {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      background-color: #f2a5b5;
+      color: white;
+      font-weight: bold;
+      border: none;
+      padding: 12px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #e08fa2;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      color: #aaa;
+      font-size: 13px;
+    }
   </style>
 </head>
+
 <body>
 
 <nav>
   <a href="index.html">Home</a>
   <a href="produk.html">Produk</a>
   <a href="artikel.html">Artikel</a>
-  <a href="tentang.html">Tentang Kami</a>
   <a href="konsultasi.html">Konsultasi</a>
-  <a href="bukutamu.html">Buku Tamu</a>
   <a href="kontak.html">Kontak Kami</a>
 </nav>
 
 <div class="container">
-  <h2>Konsultasi LAKSMIÉ</h2>
-  <form>
-    <input type="text" placeholder="Nama Lengkap" required>
-    <input type="email" placeholder="Email" required>
-    <textarea rows="4" placeholder="Konsultasi atau Pertanyaan..." required></textarea>
-    <button type="submit">Kirim</button>
-  </form>
+  <h1>Formulir Konsultasi Kecantikan</h1>
+
+  <div class="flex-box">
+
+    <div class="form-section">
+      <form onsubmit="tampilkanPesan(event)">
+        <label>Nama Lengkap</label>
+        <input type="text" id="nama" required>
+
+        <label>Email</label>
+        <input type="email" id="email" required>
+
+        <label>Jenis Kulit</label>
+        <select id="jenis">
+          <option>Normal</option>
+          <option>Berminyak</option>
+          <option>Kering</option>
+          <option>Kombinasi</option>
+          <option>Sensitif</option>
+        </select>
+
+        <label>Keluhan Kulit</label>
+        <textarea id="keluhan" required></textarea>
+
+        <button type="submit">Kirim Konsultasi</button>
+      </form>
+    </div>
+
+    <div class="output-section" id="hasil">
+      <em>Ringkasan konsultasi akan muncul di sini.</em>
+    </div>
+
+  </div>
 </div>
 
-<div style="text-align:center; margin-top:10px;">
-  <a href="index.html">&larr; Kembali ke Beranda</a>
-</div>
+<footer>
+  &copy; 2026 Laksmié. Semua Hak Dilindungi.
+</footer>
+
+<script>
+function tampilkanPesan(e) {
+  e.preventDefault();
+
+  const nama = document.getElementById("nama").value;
+  const email = document.getElementById("email").value;
+  const jenis = document.getElementById("jenis").value;
+  const keluhan = document.getElementById("keluhan").value;
+
+  document.getElementById("hasil").innerHTML = `
+    <h3>Ringkasan Konsultasi</h3>
+    <p><b>Nama:</b> ${nama}</p>
+    <p><b>Email:</b> ${email}</p>
+    <p><b>Jenis Kulit:</b> ${jenis}</p>
+    <p><b>Keluhan:</b><br>${keluhan}</p>
+    <p style="color:green;"><em>Terima kasih 💖 Tim kami akan menghubungi Anda.</em></p>
+  `;
+}
+</script>
 
 </body>
 </html>
