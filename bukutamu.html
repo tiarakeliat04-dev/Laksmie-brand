@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Buku Tamu - LAKSMIÉ</title>
+<style>
+body { font-family: Arial,sans-serif; background:#fffaf9; margin:0; padding:20px; }
+.container { max-width:700px; margin:auto; background:white; padding:20px; border-radius:8px; box-shadow:0 0 10px rgba(0,0,0,0.1); }
+h2 { color:#f2a5b5; text-align:center; }
+form { margin-bottom:30px; }
+input, textarea { width:100%; padding:10px; margin:5px 0 15px; border:1px solid #ccc; border-radius:5px; }
+button { background:#f2a5b5; color:white; padding:10px 20px; border:none; border-radius:5px; cursor:pointer; }
+button:hover { background:#e08fa2; }
+table { width:100%; border-collapse:collapse; font-size:14px; }
+th, td { border:1px solid #ddd; padding:10px; }
+th { background:#f2a5b5; color:white; text-align:left; }
+</style>
+</head>
+<body>
+
+<div class="container">
+<h2>Buku Tamu LAKSMIÉ</h2>
+
+<form id="guestForm">
+<input type="text" id="nama" placeholder="Nama Lengkap" required>
+<input type="email" id="email" placeholder="Email" required>
+<textarea id="pesan" rows="4" placeholder="Pesan..." required></textarea>
+<button type="submit">Kirim</button>
+</form>
+
+<h3>Data Buku Tamu:</h3>
+<table id="guestTable">
+<tr>
+<th>No</th>
+<th>Nama</th>
+<th>Email</th>
+<th>Pesan</th>
+</tr>
+</table>
+</div>
+
+<script>
+let guests = [];
+
+// Ambil data dari bukutamu.json
+fetch('bukutamu.json')
+  .then(res => res.json())
+  .then(data => {
+    guests = data;
+    renderTable();
+  });
+
+// Render tabel buku tamu
+function renderTable() {
+  const table = document.getElementById('guestTable');
+  table.innerHTML = '<tr><th>No</th><th>Nama</th><th>Email</th><th>Pesan</th></tr>';
+  guests.forEach((g,i)=>{
+    const row = table.insertRow();
+    row.insertCell(0).textContent = i+1;
+    row.insertCell(1).textContent = g.nama;
+    row.insertCell(2).textContent = g.email;
+    row.insertCell(3).textContent = g.pesan;
+  });
+}
+
+// Tambah data baru (hanya di browser, tidak menulis JSON di GitHub Pages)
+document.getElementById('guestForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  const nama = document.getElementById('nama').value;
+  const email = document.getElementById('email').value;
+  const pesan = document.getElementById('pesan').value;
+
+  guests.unshift({nama,email,pesan}); // tambahkan di depan
+  renderTable();
+  this.reset();
+  alert('Terima kasih! Pesan Anda berhasil dikirim.');
+});
+</script>
+
+</body>
+</html>
